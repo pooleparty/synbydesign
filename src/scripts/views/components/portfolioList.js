@@ -32,7 +32,8 @@ var PortfolioList = React.createClass({
     return {
       webItems: PortfolioStore.getCollectionByCategory('web'),
       designItems: PortfolioStore.getCollectionByCategory('design'),
-      otherItems: PortfolioStore.getCollectionByCategory('other')
+      otherItems: PortfolioStore.getCollectionByCategory('other'),
+      mixItems: PortfolioStore.getCollectionByCategory('mixes')
     };
   },
 
@@ -67,48 +68,63 @@ var PortfolioList = React.createClass({
 
     var webItems = _mapDataToPortfolioItems(this.state.webItems, 'web');
     var designItems = _mapDataToPortfolioItems(this.state.designItems, 'design');
+    var mixItems = _mapDataToPortfolioItems(this.state.mixItems, 'mixes');
     var otherItems = _mapDataToPortfolioItems(this.state.otherItems, 'other');
 
     var webContent;
     var designContent;
+    var mixContent;
     var otherContent;
+
+    if( mixItems.length > 0 ){
+      mixContent = (
+        <section>
+          <h1 className="h3  text-center">DJ Mixes</h1>
+          <p className="text-center">Yeah... I DJ too</p>
+          <ul className="portfolio  row  center-xs  start-sm">
+            {mixItems}
+          </ul>
+        </section>
+      );
+    }
 
     if( webItems.length > 0 ){
       webContent = (
-        <div>
+        <section>
           <h1 className="h3  text-center">Web Design &amp; Development</h1>
           <ul className="portfolio  row  center-xs  start-sm">
             {webItems}
           </ul>
-        </div>
+        </section>
       );
     }
 
     if( designItems.length > 0 ){
       designContent = (
-        <div>
+        <section>
           <h1 className="h3  text-center">Illustration, Logos, &amp; Flyers</h1>
           <ul className="portfolio  row  center-xs  start-sm">
             {designItems}
           </ul>
-        </div>
+        </section>
       );
     }
 
     if( otherItems.length > 0 ){
       otherContent = (
-        <div>
+        <section>
           <h1 className="h3  text-center">Other</h1>
           <ul className="portfolio  row  center-xs  start-sm">
             {otherItems}
           </ul>
-        </div>
+        </section>
       );
     }
 
     return (<div id={AppConsts.UIID.portfolioList}>
       {webContent}
       {designContent}
+      {mixContent}
       {otherContent}
     </div>);
   }
