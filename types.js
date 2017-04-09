@@ -48,6 +48,21 @@ export type Syn$AboutService = {
   fetch: () => Promise<Syn$About>,
 };
 
+export type Syn$AboutController = {
+  index: (req: express$Request, res: express$Response) => void,
+};
+
+export type Syn$PortfolioController = {
+  index: (req: express$Request, res: express$Response) => void,
+  detail: (req: express$Request, res: express$Response) => void,
+};
+
+export type Syn$UIController = {
+  index: (req: express$Request, res: express$Response, props: Object) => void,
+  detail: (req: express$Request, res: express$Response, props: Object) => void,
+  all: (req: express$Request, res: express$Response) => void,
+}
+
 export type Syn$LoadPortfolio = () => Promise<Syn$Portfolio[]>;
 
 export type Syn$PortfolioDetailComponentProps = {
