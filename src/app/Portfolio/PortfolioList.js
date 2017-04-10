@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import type { Syn$PortfolioListComponentProps } from '../../../types';
 
 export default class PortfolioList extends Component {
@@ -14,7 +15,11 @@ export default class PortfolioList extends Component {
     return (
       <div>
         This is the portfolio list
-        {portfolio.map(item => <li key={`item-${item.title}`}>{item.title}</li>)}
+        {portfolio.map(item => (
+          <li key={`item-${item.title}`}>
+            <Link to={`/detail/${item.url}`}>{item.title}</Link>
+          </li>
+        ))}
       </div>
     );
   }

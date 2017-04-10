@@ -26,6 +26,10 @@ type Syn$PortfolioMeta = {
   websiteUrl: string,
 };
 
+export type Syn$TitledObject = {
+  title: string,
+};
+
 export type Syn$Portfolio = {|
   category: string[],
   imagePaths: {
@@ -37,6 +41,7 @@ export type Syn$Portfolio = {|
   svgSource: ?string,
   tags: string[],
   title: string,
+  url: ?string,
 |};
 
 export type Syn$PortfolioService = {

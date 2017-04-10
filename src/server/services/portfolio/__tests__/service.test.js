@@ -1,6 +1,6 @@
 /* @flow */
 import portfolioService from '../service';
-import getPortfolioId from '../../../../util/portfolio';
+import getIdByTitle from '../../../../util/portfolio';
 import portfolioData from '../../../../data/portfolio.json';
 
 describe('Portfolio Service', () => {
@@ -15,7 +15,7 @@ describe('Portfolio Service', () => {
 
   describe('#fetchById', () => {
     const portfolioItem = portfolioData[3];
-    const id = getPortfolioId(portfolioItem);
+    const id = getIdByTitle(portfolioItem);
     it('should return a matching record', (done) => {
       portfolioService
         .fetchById(id)

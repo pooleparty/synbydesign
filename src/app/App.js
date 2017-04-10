@@ -1,14 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react';
-// import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import type { Syn$AppProps } from '../../types';
-
-// function mapStateToProps({ portfolio }) {
-//   return {
-//     portfolio,
-//   };
-// }
 
 export default function App({
   children,
@@ -29,5 +22,3 @@ App.propTypes = {
 App.defaultProps = {
   children: null,
 };
-
-// export default connect(mapStateToProps)(App);

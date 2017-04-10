@@ -1,7 +1,7 @@
 /* @flow */
 import { kebabCase } from 'lodash';
-import type { Syn$Portfolio } from '../../types';
+import type { Syn$TitledObject } from '../../types';
 
-export default function getPortfolioId(portfolio: Syn$Portfolio): string {
+export default function getIdByTitle(portfolio: Syn$TitledObject): string {
   return kebabCase(portfolio.title);
 }

@@ -5,9 +5,18 @@ import { filter, head } from 'lodash';
 import type {
   Syn$PortfolioService,
   Syn$LoadPortfolio,
+  Syn$Portfolio,
 } from '../../../../types';
-import getPortfolioId from '../../../util/portfolio';
-import portfolioData from '../../../data/portfolio.json';
+import getIdByTitle from '../../../util/portfolio';
+import portfolioRawData from '../../../data/portfolio.json';
+
+// $FlowFixMe
+const addURLToPortfolio = (portfolio: Object): Syn$Portfolio => ({
+  ...portfolio,
+  url: getIdByTitle(portfolio),
+});
+
+const portfolioData: Syn$Portfolio[] = portfolioRawData.map(addURLToPortfolio);
 
 const loadPortfolio: Syn$LoadPortfolio = () => {
   winston.info('Requesting data from portfolio service');
@@ -29,7 +38,7 @@ const service: Syn$PortfolioService = {
     return loadPortfolio().then((portfolioList) => {
       // filter by title
       winston.log(`filtering by ${id} on list`, portfolioList);
-      return head(filter(portfolioList, portfolio => id === getPortfolioId(portfolio)));
+      return head(filter(portfolioList, portfolio => id === getIdByTitle(portfolio)));
     });
   },
 };

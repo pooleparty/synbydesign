@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PortfolioList from './PortfolioList';
 import PortfolioDetail from './PortfolioDetail';
 import { loadPortfolio, loadPortfolioDetail } from './actions';
-import getPortfolioId from '../../util/portfolio';
+import getIdByTitle from '../../util/portfolio';
 import type { Syn$RootState } from '../../../types';
 
 function mapStateToPropsForList({ portfolio }: Syn$RootState) {
@@ -13,10 +13,10 @@ function mapStateToPropsForList({ portfolio }: Syn$RootState) {
 }
 
 function mapStateToPropsForDetail(state: Syn$RootState) {
-  // FIXME: this shoudl go into a selector
+  // FIXME: this should go into a selector
   return {
     portfolioDetail: state.portfolio ?
-      state.portfolio.filter(item => getPortfolioId(item) === state.selectedPortfolioId)[0] :
+      state.portfolio.filter(item => getIdByTitle(item) === state.selectedPortfolioId)[0] :
       {},
   };
 }
