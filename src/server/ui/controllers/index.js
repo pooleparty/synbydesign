@@ -39,6 +39,7 @@ function renderUIWithStoreData(
 
 const ctrl: Syn$UIController = {
   index(req, res, props) {
+    winston.info('Loading index');
     Promise.all([
       portfolioService.fetchAll(),
       aboutService.fetch(),
@@ -59,10 +60,11 @@ const ctrl: Syn$UIController = {
   },
 
   detail(req, res, props) {
+    winston.info('Loading detail');
     portfolioService
     .fetchById(props.params.id)
     .then((portfolioItem: ?Syn$Portfolio) => {
-      winston.log('Controller detail response portfolioItem:', props.params.id, portfolioItem);
+      winston.info('Controller detail response portfolioItem:', props.params.id, portfolioItem);
 
       renderUIWithStoreData(res, props, {
         selectedPortfolioId: props.params.id,
@@ -75,7 +77,7 @@ const ctrl: Syn$UIController = {
     });
   },
   all(req, res) {
-    winston.log('Loading all');
+    winston.info('Loading all', req.url);
     // routes is our object of React routes defined above
     match({
       routes,

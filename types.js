@@ -31,17 +31,24 @@ export type Syn$TitledObject = {
 };
 
 export type Syn$Portfolio = {|
-  category: string[],
+  categories: string[],
   imagePaths: {
     full: {
       url: string,
     },
+    medium: ?{
+      url: string,
+    },
+    thumbnail: ?{
+      url: string,
+    }
   },
   meta: ?Syn$PortfolioMeta,
   svgSource: ?string,
   tags: string[],
   title: string,
   url: ?string,
+  description: ?string,
 |};
 
 export type Syn$PortfolioService = {

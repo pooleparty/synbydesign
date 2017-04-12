@@ -18,12 +18,29 @@ export default class PortfolioDetail extends Component {
     }
   }
   props: Syn$PortfolioDetailComponentProps;
+  
+  static defaultProps = {
+    portfolioDetail: {
+      categories: [],
+      imagePaths: {
+        full: {}
+      }
+    },
+    params: {},
+  };
+
   render() {
     const { params, portfolioDetail } = this.props;
     console.log('Inside PortfolioDetail Component', 'portfolioDetail', portfolioDetail);
+    const { title, imagePaths, description, categories } = portfolioDetail;
     return (
       <div className={styles.detail}>
         This is the detail view! {params.id}
+        <h1>{title}</h1>
+        <img src={imagePaths.full.url} />
+        <ul>
+          {categories.map(category => <li key={category}>{category}</li>)}
+        </ul>
       </div>
     );
   }
