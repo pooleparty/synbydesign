@@ -2,8 +2,22 @@
 import React, { Component } from 'react';
 import styles from './PortfolioDetail.css';
 import type { Syn$PortfolioDetailComponentProps } from '../../../types';
+import getIdByTitle from '../../util/portfolio';
 
 export default class PortfolioDetail extends Component {
+
+  static defaultProps = {
+    params: {},
+  };
+
+  componentWillMount() {
+    this.props.resetSelectedPortfolio();
+  }
+
+  componentWillUnmount() {
+    this.props.resetSelectedPortfolio();
+  }
+
   componentDidMount() {
     const {
       portfolioDetail,
@@ -13,31 +27,29 @@ export default class PortfolioDetail extends Component {
 
     const id: string = params.id;
 
-    if (!portfolioDetail.title) {
+    if (!portfolioDetail) {
       loadPortfolioDetail(id);
     }
   }
+
   props: Syn$PortfolioDetailComponentProps;
-  
-  static defaultProps = {
-    portfolioDetail: {
-      categories: [],
-      imagePaths: {
-        full: {}
-      }
-    },
-    params: {},
-  };
 
   render() {
     const { params, portfolioDetail } = this.props;
-    console.log('Inside PortfolioDetail Component', 'portfolioDetail', portfolioDetail);
-    const { title, imagePaths, description, categories } = portfolioDetail;
+    
+    if (!portfolioDetail || getIdByTitle(portfolioDetail) !== params.id) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+
+    const { title, imagePaths = { full: {} }, description, categories = [] } = portfolioDetail;
     return (
       <div className={styles.detail}>
         This is the detail view! {params.id}
         <h1>{title}</h1>
-        <img src={imagePaths.full.url} />
+        <img src={imagePaths.full.url} alt={title} />
+        <p>{description}</p>
         <ul>
           {categories.map(category => <li key={category}>{category}</li>)}
         </ul>

@@ -79,10 +79,11 @@ export type Syn$LoadPortfolio = () => Promise<Syn$Portfolio[]>;
 
 export type Syn$PortfolioDetailComponentProps = {
   loadPortfolioDetail: (id: string) => Syn$Action,
+  resetSelectedPortfolio: () => Syn$Action,
+  portfolioDetail: Syn$Portfolio,
   params: {
     id: string,
   },
-  portfolioDetail: Syn$Portfolio,
 };
 
 export type Syn$PortfolioListComponentProps = {

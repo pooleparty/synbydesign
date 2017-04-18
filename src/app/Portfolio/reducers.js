@@ -4,6 +4,8 @@ import {
   LOAD_PORTFOLIO_SUCCEEDED,
   LOAD_PORTFOLIO_DETAIL_SUCCEEDED,
   LOAD_PORTFOLIO_DETAIL,
+  RESET_SELECTED_PORTFOLIO_DETAIL,
+  // SELECT_PORTFOLIO_DETAIL,
 } from './actions';
 import type {
   Syn$Portfolio,
@@ -41,6 +43,8 @@ export function selectedPortfolioIdReducer(
   switch (action.type) {
     case LOAD_PORTFOLIO_DETAIL:
       return action.payload;
+    case RESET_SELECTED_PORTFOLIO_DETAIL:
+      return null;
     default:
       return state;
   }
