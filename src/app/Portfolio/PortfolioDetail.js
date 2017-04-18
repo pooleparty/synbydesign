@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import styles from './portfolioDetail.css';
+import styles from './PortfolioDetail.css';
 import type { Syn$PortfolioDetailComponentProps } from '../../../types';
 
 export default class PortfolioDetail extends Component {
@@ -13,7 +13,7 @@ export default class PortfolioDetail extends Component {
 
     const id: string = params.id;
 
-    if (!portfolioDetail) {
+    if (!portfolioDetail.title) {
       loadPortfolioDetail(id);
     }
   }
