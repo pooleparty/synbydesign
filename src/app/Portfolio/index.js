@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PortfolioList from './PortfolioList';
 import PortfolioDetail from './PortfolioDetail';
 import { loadPortfolio, loadPortfolioDetail, resetSelectedPortfolio } from './actions';
-import getIdByTitle from '../../util/portfolio';
 import type { Syn$RootState } from '../../../types';
 import portfolioDetailSelector from './selectors';
 

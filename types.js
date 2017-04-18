@@ -31,6 +31,7 @@ export type Syn$TitledObject = {
 };
 
 export type Syn$Portfolio = {|
+  id: string,
   categories: string[],
   imagePaths: {
     full: {
@@ -47,7 +48,6 @@ export type Syn$Portfolio = {|
   svgSource: ?string,
   tags: string[],
   title: string,
-  url: ?string,
   description: ?string,
 |};
 

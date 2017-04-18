@@ -1,7 +1,7 @@
 /* @flow */
 import Promise from 'bluebird';
 import winston from 'winston';
-import { filter, head } from 'lodash';
+import { find } from 'lodash';
 import type {
   Syn$PortfolioService,
   Syn$LoadPortfolio,
@@ -11,12 +11,12 @@ import getIdByTitle from '../../../util/portfolio';
 import portfolioRawData from '../../../data/portfolio.json';
 
 // $FlowFixMe
-const addURLToPortfolio = (portfolio: Object): Syn$Portfolio => ({
+const addIdToPortfolio = (portfolio: Object): Syn$Portfolio => ({
   ...portfolio,
-  url: getIdByTitle(portfolio),
+  id: getIdByTitle(portfolio),
 });
 
-const portfolioData: Syn$Portfolio[] = portfolioRawData.map(addURLToPortfolio);
+const portfolioData: Syn$Portfolio[] = portfolioRawData.map(addIdToPortfolio);
 
 const loadPortfolio: Syn$LoadPortfolio = () => {
   winston.info('Requesting data from portfolio service');
@@ -36,9 +36,8 @@ const service: Syn$PortfolioService = {
   fetchById(id: string) {
     winston.info('PortfolioService#fetchById', id);
     return loadPortfolio().then((portfolioList) => {
-      // filter by title
       winston.log(`filtering by ${id} on list`, portfolioList);
-      return head(filter(portfolioList, portfolio => id === getIdByTitle(portfolio)));
+      return find(portfolioList, portfolio => portfolio.id === id);
     });
   },
 };

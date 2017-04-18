@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import styles from './PortfolioDetail.css';
 import type { Syn$PortfolioDetailComponentProps } from '../../../types';
-import getIdByTitle from '../../util/portfolio';
 
 export default class PortfolioDetail extends Component {
 
@@ -37,7 +36,7 @@ export default class PortfolioDetail extends Component {
   render() {
     const { params, portfolioDetail } = this.props;
     
-    if (!portfolioDetail || getIdByTitle(portfolioDetail) !== params.id) {
+    if (!portfolioDetail || portfolioDetail.id !== params.id) {
       return (
         <div>Loading...</div>
       );
