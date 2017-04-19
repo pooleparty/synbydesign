@@ -21,20 +21,21 @@ function renderUIWithStoreData(
   res: express$Response,
   props: Object,
   storeData: Syn$RootState): void {
-  const store = initStore(storeData);
+    const store = initStore(storeData);    
 
-  // if we got props, that means we found a valid component to render
-  // for the given route
-  const html = renderToString(
-    <Provider store={store}>
-      <RouterContext {...props} />
-    </Provider>,
-  );
-  // render `index.ejs`, but pass in the markup we want it to display
-  res.render('index', {
-    html,
-    data: store.getState(),
-  });
+    // if we got props, that means we found a valid component to render
+    // for the given route
+    const html = renderToString(
+      <Provider store={store}>
+        <RouterContext {...props} />
+      </Provider>,
+    );
+    // render `index.ejs`, but pass in the markup we want it to display
+    
+    res.render('index', {
+      html,
+      data: store.getState(),
+    });
 }
 
 const ctrl: Syn$UIController = {

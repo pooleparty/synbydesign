@@ -9,12 +9,24 @@ export default class PortfolioDetail extends Component {
     params: {},
   };
 
-  componentWillMount() {
-    this.props.resetSelectedPortfolio();
+  hasLoadedPortfolio: () => void;
+
+  constructor(props: Syn$PortfolioDetailComponentProps) {
+    super(props);
+    this.hasLoadedPortfolio = this.hasLoadedPortfolio.bind(this);
   }
 
   componentWillUnmount() {
     this.props.resetSelectedPortfolio();
+  }
+
+  hasLoadedPortfolio() {
+    const { params, portfolioDetail } = this.props;
+    if (!portfolioDetail || portfolioDetail.id !== params.id) {
+      return false;
+    }
+
+    return true;
   }
 
   componentDidMount() {
@@ -26,7 +38,7 @@ export default class PortfolioDetail extends Component {
 
     const id: string = params.id;
 
-    if (!portfolioDetail) {
+    if (!this.hasLoadedPortfolio()) {
       loadPortfolioDetail(id);
     }
   }
@@ -34,15 +46,15 @@ export default class PortfolioDetail extends Component {
   props: Syn$PortfolioDetailComponentProps;
 
   render() {
-    const { params, portfolioDetail } = this.props;
-    
-    if (!portfolioDetail || portfolioDetail.id !== params.id) {
+    if (!this.hasLoadedPortfolio()) {
       return (
         <div>Loading...</div>
       );
     }
 
+    const { params, portfolioDetail } = this.props;
     const { title, imagePaths = { full: {} }, description, categories = [] } = portfolioDetail;
+
     return (
       <div className={styles.detail}>
         This is the detail view! {params.id}
