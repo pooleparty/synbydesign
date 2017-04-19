@@ -5,7 +5,6 @@ import {
   LOAD_PORTFOLIO_DETAIL_SUCCEEDED,
   LOAD_PORTFOLIO_DETAIL,
   RESET_SELECTED_PORTFOLIO_DETAIL,
-  // SELECT_PORTFOLIO_DETAIL,
 } from './actions';
 import type {
   Syn$Portfolio,
@@ -22,6 +21,24 @@ const defaultSelectedPortfolioAction = {
   payload: null,
 };
 
+function addPortfolioToList(portfolio: Syn$Portfolio[] = [], portfolioItem?: Syn$Portfolio): Syn$Portfolio[] {
+  if (!portfolioItem) {
+    return portfolio;
+  }
+
+  const { id } = portfolioItem;
+  const result = portfolio.find((item) => item.id === id);
+
+  if (result) {
+    return portfolio;
+  }
+
+  return [
+    ...portfolio,
+    portfolioItem,
+  ];
+}
+
 export function portfolioReducer(
   state: Syn$Portfolio[] = [],
   action: Syn$Action = defaultPortfolioAction) {
@@ -29,9 +46,7 @@ export function portfolioReducer(
     case LOAD_PORTFOLIO_SUCCEEDED:
       return action.payload;
     case LOAD_PORTFOLIO_DETAIL_SUCCEEDED:
-      // FIXME: this will need to be refined in the event portfolio list is already hydrated
-      // we don't want to just tack on duplicates at the end of the list
-      return [...state, action.payload];
+      return addPortfolioToList(state, action.payload);
     default:
       return state;
   }
