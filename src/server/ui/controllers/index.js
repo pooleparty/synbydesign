@@ -52,6 +52,8 @@ const ctrl: Syn$UIController = {
       renderUIWithStoreData(res, props, {
         portfolio,
         about: about.content,
+        portfolioLoaded: true,
+        aboutLoaded: true,
       });
     })
     .catch((err) => {

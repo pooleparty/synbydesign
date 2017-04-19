@@ -6,9 +6,10 @@ import { loadPortfolio, loadPortfolioDetail, resetSelectedPortfolio } from './ac
 import type { Syn$RootState } from '../../../types';
 import portfolioDetailSelector from './selectors';
 
-function mapStateToPropsForList({ portfolio }: Syn$RootState) {
+function mapStateToPropsForList({ portfolio, portfolioLoaded }: Syn$RootState) {
   return {
     portfolio,
+    portfolioLoaded,
   };
 }
 
@@ -20,6 +21,7 @@ export const PortfolioListContainer = connect(
 function mapStateToPropsForDetail(state: Syn$RootState) {
   return {
     portfolioDetail: portfolioDetailSelector(state),
+    portfolioLoaded: state.portfolioLoaded,
   };
 }
 

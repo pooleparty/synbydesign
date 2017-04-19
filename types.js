@@ -4,13 +4,17 @@ export type Syn$RootState = {
   loadingCount?: number,
   portfolio: Syn$Portfolio[],
   selectedPortfolioId?: string,
+  portfolioLoaded?: boolean,
+  aboutLoaded?: boolean,
 };
 
 export type Syn$RootStateReducer = {
-  about: Function,
-  loadingCount: Function,
-  portfolio: Function,
-  selectedPortfolioId: Function,
+  about: (state: ?string, action: Syn$Action) => ?string,
+  loadingCount: (state: number, action: Syn$Action) => number,
+  portfolio: (state: ?Syn$Portfolio[], action: Syn$Action) => ?Syn$Portfolio[],
+  selectedPortfolioId: (state: ?string, action: Syn$Action) => ?string,
+  portfolioLoaded: (state: boolean, action: Syn$Action) => boolean,
+  aboutLoaded: (state: boolean, action: Syn$Action) => boolean,
 };
 
 export type Syn$AppProps = {
@@ -89,6 +93,7 @@ export type Syn$PortfolioDetailComponentProps = {
 export type Syn$PortfolioListComponentProps = {
   loadPortfolio: Function,
   portfolio: Syn$Portfolio[],
+  
 };
 
 export type Syn$Action = {|
@@ -103,6 +108,7 @@ export type Syn$About = {
 export type Syn$AboutComponentProps = {
   about: string,
   loadAbout: Function,
+  aboutLoaded: boolean,
 };
 
 export type Syn$Api = {

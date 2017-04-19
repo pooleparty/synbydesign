@@ -4,9 +4,10 @@ import About from './About';
 import { loadAbout } from './actions';
 import type { Syn$RootState } from '../../../types';
 
-function mapStateToProps({ about }: Syn$RootState) {
+function mapStateToProps({ about, aboutLoaded }: Syn$RootState) {
   return {
     about,
+    aboutLoaded,
   };
 }
 

@@ -1,6 +1,7 @@
 /* @flow */
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger';
 import rootReducer from './rootReducer';
 import type { Syn$RootState } from '../../types';
 import rootSagas from './sagaWatchers';
@@ -17,7 +18,7 @@ export default function initializeStore(state: Syn$RootState) {
     combineReducers(rootReducer),
     s,
     compose(
-      applyMiddleware(sagaMiddleware),
+      applyMiddleware(logger, sagaMiddleware),
     ),
   );
 

@@ -12,12 +12,23 @@ const defaultAboutAction: Syn$Action = {
   payload: '',
 };
 
-export default function aboutReducer(
-  state: string = '',
-  action: Syn$Action = defaultAboutAction) {
+export function aboutReducer(
+  state: ?string = '',
+  action: Syn$Action = defaultAboutAction): ?string {
   switch (action.type) {
     case LOAD_ABOUT_SUCCEEDED:
       return action.payload;
+    default:
+      return state;
+  }
+}
+
+export function aboutLoadedReducer(
+  state: boolean = false,
+  action: Syn$Action = defaultAboutAction): boolean {
+  switch (action.type) {
+    case LOAD_ABOUT_SUCCEEDED:
+      return true;
     default:
       return state;
   }

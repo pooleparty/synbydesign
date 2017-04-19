@@ -6,7 +6,9 @@ import type { Syn$PortfolioListComponentProps } from '../../../types';
 export default class PortfolioList extends Component {
 
   componentDidMount() {
-    this.props.loadPortfolio();
+    if (!this.props.portfolioLoaded) {
+      this.props.loadPortfolio();
+    }
   }
 
   props: Syn$PortfolioListComponentProps;

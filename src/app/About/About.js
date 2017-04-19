@@ -6,7 +6,9 @@ import type {
 
 export default class About extends Component {
   componentDidMount() {
-    this.props.loadAbout();
+    if (!this.props.aboutLoaded) {
+      this.props.loadAbout();
+    }
   }
 
   props: Syn$AboutComponentProps;
