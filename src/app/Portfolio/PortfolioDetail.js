@@ -9,29 +9,13 @@ export default class PortfolioDetail extends Component {
     params: {},
   };
 
-  hasLoadedPortfolio: () => void;
-
   constructor(props: Syn$PortfolioDetailComponentProps) {
     super(props);
     this.hasLoadedPortfolio = this.hasLoadedPortfolio.bind(this);
   }
 
-  componentWillUnmount() {
-    this.props.resetSelectedPortfolio();
-  }
-
-  hasLoadedPortfolio() {
-    const { params, portfolioDetail } = this.props;
-    if (!portfolioDetail || portfolioDetail.id !== params.id) {
-      return false;
-    }
-
-    return true;
-  }
-
   componentDidMount() {
     const {
-      portfolioDetail,
       loadPortfolioDetail,
       params,
     } = this.props;
@@ -41,6 +25,21 @@ export default class PortfolioDetail extends Component {
     if (!this.hasLoadedPortfolio()) {
       loadPortfolioDetail(id);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetSelectedPortfolio();
+  }
+
+  hasLoadedPortfolio: () => void;
+
+  hasLoadedPortfolio() {
+    const { params, portfolioDetail } = this.props;
+    if (!portfolioDetail || portfolioDetail.id !== params.id) {
+      return false;
+    }
+
+    return true;
   }
 
   props: Syn$PortfolioDetailComponentProps;

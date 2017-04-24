@@ -14,32 +14,31 @@ import type {
   Syn$About,
   Syn$Portfolio,
   Syn$RootState,
-  Syn$UIController,
 } from '../../../../types';
 
 function renderUIWithStoreData(
   res: express$Response,
   props: Object,
   storeData: Syn$RootState): void {
-    const store = initStore(storeData);    
+  const store = initStore(storeData);
 
-    // if we got props, that means we found a valid component to render
-    // for the given route
-    const html = renderToString(
-      <Provider store={store}>
-        <RouterContext {...props} />
-      </Provider>,
-    );
-    // render `index.ejs`, but pass in the markup we want it to display
-    
-    res.render('index', {
-      html,
-      data: store.getState(),
-    });
+  // if we got props, that means we found a valid component to render
+  // for the given route
+  const html = renderToString(
+    <Provider store={store}>
+      <RouterContext {...props} />
+    </Provider>,
+  );
+  // render `index.ejs`, but pass in the markup we want it to display
+
+  res.render('index', {
+    html,
+    data: store.getState(),
+  });
 }
 
-const ctrl: Syn$UIController = {
-  index(req, res, props) {
+const ctrl = {
+  index(req: express$Request, res: express$Response, props: Object): void {
     winston.info('Loading index');
     Promise.all([
       portfolioService.fetchAll(),
@@ -62,7 +61,7 @@ const ctrl: Syn$UIController = {
     });
   },
 
-  detail(req, res, props) {
+  detail(req: express$Request, res: express$Response, props: Object): void {
     winston.info('Loading detail');
     portfolioService
     .fetchById(props.params.id)
@@ -79,7 +78,7 @@ const ctrl: Syn$UIController = {
       throw new Error(err);
     });
   },
-  all(req, res) {
+  all(req: express$Request, res: express$Response): void {
     winston.info('Loading all', req.url);
     // routes is our object of React routes defined above
     match({
@@ -111,7 +110,7 @@ const ctrl: Syn$UIController = {
         res.sendStatus(404);
       }
     });
-  }
+  },
 };
 
 export default ctrl;

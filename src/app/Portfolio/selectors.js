@@ -10,9 +10,7 @@ const selectedPortfolioIdSelector = (state: Syn$RootState) => state.selectedPort
 
 const portfolioDetailSelector = createSelector(
   [portfolioSelector, selectedPortfolioIdSelector],
-  (portfolio: Syn$Portfolio[], id?: string) => {
-    return portfolio.find(item => item.id === id);
-  }
+  (portfolio: Syn$Portfolio[], id?: string) => portfolio.find(item => item.id === id),
 );
 
 export default portfolioDetailSelector;

@@ -1,20 +1,20 @@
 /* @flow */
 export type Syn$RootState = {
   about?: string,
+  aboutLoaded?: boolean,
   loadingCount?: number,
   portfolio: Syn$Portfolio[],
-  selectedPortfolioId?: string,
   portfolioLoaded?: boolean,
-  aboutLoaded?: boolean,
+  selectedPortfolioId?: string,
 };
 
 export type Syn$RootStateReducer = {
   about: (state: ?string, action: Syn$Action) => ?string,
+  aboutLoaded: (state: boolean, action: Syn$Action) => boolean,
   loadingCount: (state: number, action: Syn$Action) => number,
   portfolio: (state: ?Syn$Portfolio[], action: Syn$Action) => ?Syn$Portfolio[],
-  selectedPortfolioId: (state: ?string, action: Syn$Action) => ?string,
   portfolioLoaded: (state: boolean, action: Syn$Action) => boolean,
-  aboutLoaded: (state: boolean, action: Syn$Action) => boolean,
+  selectedPortfolioId: (state: ?string, action: Syn$Action) => ?string,
 };
 
 export type Syn$AppProps = {
@@ -35,8 +35,9 @@ export type Syn$TitledObject = {
 };
 
 export type Syn$Portfolio = {|
-  id: string,
   categories: string[],
+  description: ?string,
+  id: string,
   imagePaths: {
     full: {
       url: string,
@@ -52,7 +53,6 @@ export type Syn$Portfolio = {|
   svgSource: ?string,
   tags: string[],
   title: string,
-  description: ?string,
 |};
 
 export type Syn$PortfolioService = {
@@ -64,36 +64,20 @@ export type Syn$AboutService = {
   fetch: () => Promise<Syn$About>,
 };
 
-export type Syn$AboutController = {
-  index: (req: express$Request, res: express$Response) => void,
-};
-
-export type Syn$PortfolioController = {
-  index: (req: express$Request, res: express$Response) => void,
-  detail: (req: express$Request, res: express$Response) => void,
-};
-
-export type Syn$UIController = {
-  index: (req: express$Request, res: express$Response, props: Object) => void,
-  detail: (req: express$Request, res: express$Response, props: Object) => void,
-  all: (req: express$Request, res: express$Response) => void,
-}
-
 export type Syn$LoadPortfolio = () => Promise<Syn$Portfolio[]>;
 
 export type Syn$PortfolioDetailComponentProps = {
   loadPortfolioDetail: (id: string) => Syn$Action,
-  resetSelectedPortfolio: () => Syn$Action,
-  portfolioDetail: Syn$Portfolio,
   params: {
     id: string,
   },
+  portfolioDetail: Syn$Portfolio,
+  resetSelectedPortfolio: () => Syn$Action,
 };
 
 export type Syn$PortfolioListComponentProps = {
   loadPortfolio: Function,
   portfolio: Syn$Portfolio[],
-  
 };
 
 export type Syn$Action = {|
@@ -107,8 +91,8 @@ export type Syn$About = {
 
 export type Syn$AboutComponentProps = {
   about: string,
-  loadAbout: Function,
   aboutLoaded: boolean,
+  loadAbout: Function,
 };
 
 export type Syn$Api = {

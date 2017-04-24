@@ -6,7 +6,7 @@ export default function App({
   children,
 }: Syn$AppProps) {
   return (
-    <div>      
+    <div>
       {children}
     </div>
   );

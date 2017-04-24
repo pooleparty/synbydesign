@@ -18,9 +18,7 @@ export const PortfolioListContainer = connect(
   { loadPortfolio },
 )(PortfolioList);
 
-function mapStateToPropsForDetail(state: Syn$RootState, props: Object) {
-  const { params } = props;
-  const { id }: { id: string} = params;
+function mapStateToPropsForDetail(state: Syn$RootState) {
   let portfolioDetail: ?Syn$Portfolio;
 
   if (state.selectedPortfolioId) {
