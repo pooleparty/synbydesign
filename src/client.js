@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import initializeStore from './store';
 import routes from './ui-routes';
+import './client.css';
 
 /* eslint-disable no-underscore-dangle */
 const store = initializeStore(window.__PRELOADED_DATA__);

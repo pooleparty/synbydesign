@@ -7,6 +7,11 @@ export default function App({
 }: Syn$AppProps) {
   return (
     <div>
+      <header>
+        <svg>
+          <use xlinkHref='#bydesign' />
+        </svg>
+      </header>
       {children}
     </div>
   );
